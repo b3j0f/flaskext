@@ -1,11 +1,11 @@
 """Extension for the babel module."""
 
+from flask.ext.babel import Babel
+
 from .base import Extension
 
-from b3j0f.conf import Category
+from b3j0f.conf import category, Parameter, BOOL
 from b3j0f.annotation import Annotation
-
-from flask.ext.babel import Principal
 
 
 class _Selector(Annotation):
@@ -43,20 +43,31 @@ class TimeZoneSelector(_Selector):
         )
 
 
-@Configurable(paths='etc/babel.conf', conf=Category(name='babel'))
-class PrincipalExtension(Extension):
+@Configurable(
+    paths='etc/babel.conf',
+    conf=category('babel', Parameter(name='configure_jinja', ptype=BOOL))
+)
+class BabelExtension(Extension):
     """Extension for the babel package."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(
+            self, default_locale=None, default_timezone=None, date_formats=None,
+            configure_jinja=None, *args, **kwargs
+    ):
 
-        super(PrincipalExtension, self).__init__(*args, **kwargs)
+        super(BabelExtension, self).__init__(*args, **kwargs)
 
-        self.babel = Principal()
+        self.babel = Babel(
+            default_locale=default_locale, default_timezone=default_timezone,
+            date_formats=date_formats, configure_jinja=configure_jinja
+        )
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.babel.init_app(loader.app)
         loader.babel = self.babel
+
+    def load(self, module, loader):
 
         items = []
 

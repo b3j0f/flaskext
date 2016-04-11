@@ -22,18 +22,20 @@ class AddResource(Annotation):
 
 
 @Configurable(paths='etc/rest.conf')
-class LoginExtension(Extension):
+class RESTExtension(Extension):
     """Extension for the login package."""
 
     def __init__(self, *args, **kwargs):
 
-        super(LoginExtension, self).__init__(*args, **kwargs)
+        super(RESTExtension, self).__init__(*args, **kwargs)
 
         self.api = Api()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.api.init_app(loader.app)
+
+    def load(self, module, loader):
 
         items = []
 

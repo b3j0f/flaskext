@@ -10,7 +10,7 @@ from b3j0f.conf import Category
 class UserExtension(Extension):
     """Extension for the user package."""
 
-    def _load(self, module, loader):
+    def load(self, module, loader):
 
         items = []
 

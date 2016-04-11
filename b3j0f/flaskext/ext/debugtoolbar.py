@@ -8,7 +8,6 @@ from .base import Extension
 @Configurable(paths='etc/debugtoolbar.conf', conf=Category(name='debugtoolbar'))
 class DebugToolbarExtension(Extension):
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
-        self.debugtoolbar = DebugToolbarExtension(loader.app)
-        loader.debugtoolbar = self.debugtoolbar
+        loader.debugtoolbar = DebugToolbarExtension(loader.app)

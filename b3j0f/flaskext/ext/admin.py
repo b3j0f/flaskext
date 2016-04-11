@@ -63,10 +63,12 @@ class AdminExtension(Extension):
             category_icon_classes=category_icon_classes
         ) if admin is None else admin
 
-    def _load(self, module, loader):
+    def init_loader(self, loader):
 
         self.admin.init_app(loader.app)
         loader.admin = self.admin
+
+    def load(self, module, loader):
 
         items = []
 

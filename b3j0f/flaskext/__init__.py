@@ -26,8 +26,8 @@
 
 """Main configuration package."""
 
-__all__ = [
-    '__version__',
-]
+__all__ = ['__version__', 'Loader', 'Extension']
 
 from .version import __version__
+from .core import Loader
+from .ext.base import Extension

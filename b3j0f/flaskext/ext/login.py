@@ -35,10 +35,12 @@ class LoginExtension(Extension):
 
         self.login = LoginManager()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.login.init_app(loader.app)
         loader.login = self.login
+
+    def load(self, module, loader):
 
         items = []
 

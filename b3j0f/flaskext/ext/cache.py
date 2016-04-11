@@ -48,19 +48,21 @@ class Memoize(_Cache):
 
 
 @Configurable(paths='etc/cache.conf', conf=Category(name='cache'))
-class PrincipalExtension(Extension):
+class CacheExtension(Extension):
     """Extension for the cache package."""
 
     def __init__(self, *args, **kwargs):
 
-        super(PrincipalExtension, self).__init__(*args, **kwargs)
+        super(CacheExtension, self).__init__(*args, **kwargs)
 
         self.cache = Cache()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.cache.init_app(loader.app)
         loader.cache = self.cache
+
+    def load(self, module, loader):
 
         items = []
 

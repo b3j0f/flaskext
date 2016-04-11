@@ -51,11 +51,7 @@ with open(join(BASEPATH, NAMEPATH, 'version.py')) as f:
     regex = r'.*__version__ = \'(.*?)\''
     VERSION = re_compile(regex, re_S).match(stream).group(1)
 
-KEYWORDS = [
-    'conf', 'configuration', 'configurable', 'class', 'ini', 'json', 'xml',
-    'tools', 'property', 'dynamic', 'reflection', 'reflect', 'runtime',
-    'reflectivity'
-]
+KEYWORDS = ['flask', 'website', 'extension', 'conf', 'configuration', 'tools']
 
 DEPENDENCIES = []
 with open(join(BASEPATH, 'requirements.txt')) as f:

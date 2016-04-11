@@ -53,10 +53,12 @@ class PrincipalExtension(Extension):
 
         self.principal = Principal()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.principal.init_app(loader.app)
         loader.principal = self.principal
+
+    def load(self, module, loader):
 
         items = []
 

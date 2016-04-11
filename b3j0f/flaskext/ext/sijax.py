@@ -31,9 +31,11 @@ class SijaxExtension(Extension):
 
         self.sijax = Sijax()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.sijax.init_app(loader.app)
+
+    def load(self, module, loader):
 
         items = []
 

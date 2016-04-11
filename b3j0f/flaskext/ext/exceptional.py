@@ -8,7 +8,13 @@ from .base import Extension
 @Configurable(paths='etc/exceptional.conf', conf=Category(name='exceptional'))
 class ExceptionalExtension(Extension):
 
-    def _load(self, module, loader):
+    def __init__(self, *args, **kwargs):
 
-        self.exceptional = Exceptional(loader.app)
+        super(ExceptionalExtension, self).__init__(*args, **kwargs)
+
+        self.exceptional = Exceptional()
+
+    def init(self, loader):
+
+        self.exceptional.init_app(loader.app)
         loader.exceptional = self.exceptional

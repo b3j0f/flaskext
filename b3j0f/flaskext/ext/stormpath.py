@@ -9,16 +9,16 @@ from b3j0f.conf import Category
 
 
 @Configurable(paths='etc/stormpath.conf', conf=Category(name='stormpath'))
-class PrincipalExtension(Extension):
+class StormpathExtension(Extension):
     """Extension for the stormpath package."""
 
     def __init__(self, *args, **kwargs):
 
-        super(PrincipalExtension, self).__init__(*args, **kwargs)
+        super(StormpathExtension, self).__init__(*args, **kwargs)
 
         self.stormpath = StormpathManager()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.stormpath.init_app(loader.app)
         loader.stormpath = self.stormpath

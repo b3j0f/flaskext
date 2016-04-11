@@ -17,7 +17,7 @@ class BCryptExtension(Extension):
 
         self.bcrypt = Bcrypt()
 
-    def _load(self, module, loader):
+    def init(self, loader):
 
         self.bcrypt.init_app(loader.app)
         loader.bcrypt = self.bcrypt
